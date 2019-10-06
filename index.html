@@ -12,6 +12,7 @@
 			    this.sphere = sphere;
 			    this.capital = false;
 			    this.oil = false;
+			    this.color = null;
 			    zones_registry[this.id] = this;
 			  }
 			}
@@ -23,6 +24,7 @@
 			    this.sphere = sphere;
 			    this.capital = false;
 			    this.oil = true;
+			    this.color = null;
 			    zones_registry[this.id] = this;
 			  }
 			}
@@ -45,6 +47,7 @@
 			    this.sphere = sphere;
 			    this.capital = true;
 			    this.oil = true;
+			    this.color = null;
 			    zones_registry[this.id] = this;
 			  }
 			}
@@ -85,7 +88,7 @@
 			];
 			var mexico_sphere = new Sphere();
 			mexico_sphere.zones = [
-				new CapitalZone('mx-3-capital', 3, mexico_sphere),
+				new CapitalOilZone('mx-3-capital-oil', 3, mexico_sphere),
 				new Zone('mx-1-card', 1, mexico_sphere),
 				new Zone('cuba-1-card', 1, mexico_sphere),
 				new Zone('colombia-1', 1, mexico_sphere),
@@ -219,8 +222,25 @@
 			var zones = {};
 			$(document).ready(function(){
 				$(".zone").click(function(){
-		    		console.log(zones_registry[this.id]);
+					var zone = zones_registry[this.id];
+					if(zone.color){
+						$('#color_selector').val(zone.color);
+					}
+					else{
+						$('#color_selector').val('');
+					}
+					$('#selected_zone').text(this.id);
+					$("#zone_changer").show();
 		  		});
+
+		  		$("#change_button").click(function(){
+		  			var new_color = $('#color_selector option:selected').val();
+		  			var zone_id = $('#selected_zone').text();
+		  			var zone = zones_registry[zone_id];
+		  			console.log("Changing zone from "  + zone.color + ' to ' + new_color);
+		  			zone.color = new_color;
+		  			$("#zone_changer").hide();
+		  		})
 			});
 		</script>
 	</head>	
@@ -232,7 +252,7 @@
 			<area class="zone" id="us-3" title="us-3" href="#" shape="rect" coords="37,126,64,154" />
 			<area class="zone" id="us-2-capital" title="us-2-capital" href="#" shape="rect" coords="102,145,128,170" />
 			<area class="zone" id="us_ne-3" title="us-3-capital" href="#" shape="rect" coords="119,117,147,145" />
-			<area class="zone" id="mx-3-capital" title="mx-3-capital" href="#" shape="rect" coords="38,174,75,208" />
+			<area class="zone" id="mx-3-capital-oil" title="mx-3-capital-oil" href="#" shape="rect" coords="38,174,75,208" />
 			<area class="zone" id="mx-1-card" title="mx-1-card" href="#" shape="rect" coords="76,234,104,262" />
 			<area class="zone" id="cuba-1-card" title="cuba-1-card" href="#" shape="rect" coords="121,202,144,231" />
 			<area class="zone" id="colombia-1" title="colombia-1" href="#" shape="rect" coords="116,271,140,302" />
@@ -304,5 +324,21 @@
 			<area class="zone" id="congo-1-card" title="congo-1-card" href="#" shape="rect" coords="310,306,349,336" />
 			<area class="zone" shape="rect" coords="678,464,680,466" alt="Image Map" title="Image Map" href="#index.php?aff=mapped_users_0" />
 		</map>
+		<div id="zone_changer" hidden="true">
+			<p>
+				<span id="selected_zone"></span> 
+				<select id="color_selector">
+					<option value=''></option>
+					<option value="red" style="background:red;">Red</option>
+					<option value="brown" style="background:brown;">Brown</option>
+					<option value="white" style="background:white;">White</option>
+					<option value="black" style="background:black;">Black</option>
+					<option value="blue" style="background:blue;">Blue</option>
+					<option value="yellow" style="background:yellow;">Yellow</option>
+					<option value="orange" style="background:orange;">Orange</option>
+					<option value="purple" style="background:purple;">Purple</option>
+				</select>
+				<button id="change_button">Change</button></p>
+		</div>
 	</body>
 </html>
