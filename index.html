@@ -16,10 +16,39 @@
 			var zones_registry = {};
 			var spheres_registry = [];
 
+			function shuffle(a) {
+			    var j, x, i;
+			    for (i = a.length - 1; i > 0; i--) {
+			        j = Math.floor(Math.random() * (i + 1));
+			        x = a[i];
+			        a[i] = a[j];
+			        a[j] = x;
+			    }
+			    return a;
+			}
+
+			function getTurns() {
+				var turns = [];
+				var players = listOfPlayers();
+				players.forEach(function(player) {
+					for(var i = 0; i < player.turns(); i++) {
+						turns.push(player.color);
+					}
+				});
+				return shuffle(turns);
+			}
+
+			function resourcePointsToUnits(resource_points) {
+				if(resource_points == 0) {
+					return 0;
+				}
+				return 1 + Math.floor(resource_points / 3);
+			}
+
 			function listOfPlayers() {
 				var colors_map = {
 					"red": [],
-					"brown": [],
+					"peru": [],
 					"white": [],
 					"black": [],
 					"blue": [],
@@ -51,15 +80,20 @@
 			function drawTable(table) {
 				table.clear();
 	  			listOfPlayers().forEach(function(player){ 
+	  				var resource_points = player.resource_points();
+	  				var spheres = player.spheres();
+	  				var capitals = player.capital_zones();
 	  				table.rows.add([
 	  					{
 	  						color: getColorSpan(player.color), 
-	  						resource_points: player.resource_points(),
-	  						units: 0,
+	  						resource_points: resource_points,
+	  						// Units are RP plus one for each sphere and capital city
+	  						// Official rules are for starting capital cities, not all
+	  						units: resourcePointsToUnits(resource_points) + spheres + capitals,
 	  						oil_zones: player.oil_zones(),
 	  						turns: player.turns(),
 	  						capital_zones: player.capital_zones(),
-	  						spheres: 0
+	  						spheres: player.spheres()
 	  					}
 	  				])
 	  			})
@@ -102,6 +136,16 @@
 					return sum;
 				}
 
+				spheres() {
+					var sum = 0;
+					var color = this.color;
+					spheres_registry.forEach(function(sphere) {
+						if(sphere.controllingColor() == color) {
+							sum++;
+						}
+					});
+					return sum;
+				}
 			}
 
 			class Zone {
@@ -166,6 +210,17 @@
 					}
 				}
 
+				controllingColor() {
+					var colors_in_sphere = {};
+					this.zones.forEach(function(zone) {
+						colors_in_sphere[zone.color] = true
+					});
+					var keys = Object.keys(colors_in_sphere);
+					if(keys.length == 1 && keys[0] != null) {
+						// We know only one color controls this sphere
+						return keys[0];
+					}
+				}
 
 			}
 			// North / South Americas
@@ -322,14 +377,15 @@
 				var datatable = $('#table_id').DataTable({
 				    paging: false,
 				    searching: false,
+				    bInfo : false,
 				    columns: [
 				    	{data: 'color'},
-				    	{data: 'resource_points'},
-				    	{data: 'units'},
-				    	{data: 'oil_zones'},
-				    	{data: 'turns'},
-				    	{data: 'capital_zones'},
-				    	{data: 'spheres'}
+				    	{data: 'resource_points', className: 'dt-body-center'},
+				    	{data: 'units', className: 'dt-body-center'},
+				    	{data: 'oil_zones', className: 'dt-body-center'},
+				    	{data: 'turns', className: 'dt-body-center'},
+				    	{data: 'capital_zones', className: 'dt-body-center'},
+				    	{data: 'spheres', className: 'dt-body-center'}
 				    ]
 				});
 				drawTable(datatable);
@@ -443,8 +499,8 @@
 				<span id="selected_zone"></span> 
 				<select id="color_selector">
 					<option value=''></option>
-					<option value="red" style="background:red;">Red</option>
-					<option value="brown" style="background:brown;">Brown</option>
+					<option value="red" style="background:red;peru">Red</option>
+					<option value="peru" style="background:peru;">Brown</option>
 					<option value="white" style="background:white;">White</option>
 					<option value="black" style="background:black;">Black</option>
 					<option value="blue" style="background:blue;">Blue</option>
