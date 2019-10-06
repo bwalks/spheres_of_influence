@@ -1,9 +1,106 @@
 <html>
 	<head>
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+		<style type="text/css">
+			.color {
+				 display: inline-block;
+				 min-width: 10px;
+				 opacity: 1;
+			}
+		</style>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript">
 			var zones_registry = {};
 			var spheres_registry = [];
+
+			function listOfPlayers() {
+				var colors_map = {
+					"red": [],
+					"brown": [],
+					"white": [],
+					"black": [],
+					"blue": [],
+					"yellow": [],
+					"orange": [],
+					"purple": []
+				};
+				var zones = Object.values(zones_registry);
+				zones.forEach(function(zone) {
+					if(zone.color){
+						colors_map[zone.color].push(zone);
+					}
+				});
+				var result = [];
+				Object.keys(colors_map).forEach(function(color) {
+					result.push(new Player(color, colors_map[color]))
+				});
+				return result;
+			}
+
+			function getColorSpan(color) {
+				// Adding some text so the span renders
+				return '<span class="color" style="width:200px;background-color:{};color:{}">__</span>'.replace(
+					/{}/g,
+					color
+				)
+			}
+
+			function drawTable(table) {
+				table.clear();
+	  			listOfPlayers().forEach(function(player){ 
+	  				table.rows.add([
+	  					{
+	  						color: getColorSpan(player.color), 
+	  						resource_points: player.resource_points(),
+	  						units: 0,
+	  						oil_zones: player.oil_zones(),
+	  						turns: player.turns(),
+	  						capital_zones: player.capital_zones(),
+	  						spheres: 0
+	  					}
+	  				])
+	  			})
+	  			table.draw();
+			}
+
+			class Player {
+				constructor(color, zones) {
+					this.color = color;
+					this.zones = zones;
+				}
+
+				resource_points() {
+					var sum = 0;
+					this.zones.forEach(function(zone) { sum += zone.resource_points });
+					return sum;
+				}
+
+				oil_zones() {
+					var sum = 0;
+					this.zones.forEach(function(zone) {
+						if(zone.oil) {
+							sum++;
+						}
+					});
+					return sum;
+				}
+
+				turns() {
+					return 2 + this.oil_zones();
+				}
+
+				capital_zones() {
+					var sum = 0;
+					this.zones.forEach(function(zone) {
+						if(zone.capital) {
+							sum++;
+						}
+					});
+					return sum;
+				}
+
+			}
 
 			class Zone {
 			  constructor(id, resource_points, sphere) {
@@ -219,8 +316,22 @@
 				new Zone('ethiopia-1', 1, south_afria_sphere),
 			];
 
-			var zones = {};
 			$(document).ready(function(){
+				var datatable = $('#table_id').DataTable({
+				    paging: false,
+				    searching: false,
+				    columns: [
+				    	{data: 'color'},
+				    	{data: 'resource_points'},
+				    	{data: 'units'},
+				    	{data: 'oil_zones'},
+				    	{data: 'turns'},
+				    	{data: 'capital_zones'},
+				    	{data: 'spheres'}
+				    ]
+				});
+				drawTable(datatable);
+
 				$(".zone").click(function(){
 					var zone = zones_registry[this.id];
 					if(zone.color){
@@ -240,6 +351,7 @@
 		  			console.log("Changing zone from "  + zone.color + ' to ' + new_color);
 		  			zone.color = new_color;
 		  			$("#zone_changer").hide();
+		  			drawTable(datatable);
 		  		})
 			});
 		</script>
@@ -324,8 +436,8 @@
 			<area class="zone" id="congo-1-card" title="congo-1-card" href="#" shape="rect" coords="310,306,349,336" />
 			<area class="zone" shape="rect" coords="678,464,680,466" alt="Image Map" title="Image Map" href="#index.php?aff=mapped_users_0" />
 		</map>
-		<div id="zone_changer" hidden="true">
-			<p>
+		<div>
+			<p id="zone_changer" hidden="true">
 				<span id="selected_zone"></span> 
 				<select id="color_selector">
 					<option value=''></option>
@@ -338,7 +450,23 @@
 					<option value="orange" style="background:orange;">Orange</option>
 					<option value="purple" style="background:purple;">Purple</option>
 				</select>
-				<button id="change_button">Change</button></p>
+				<button id="change_button">Change</button>
+			</p>
 		</div>
+		<table id="table_id" class="display">
+			    <thead>
+			        <tr>
+			            <th>Color</th>
+			            <th>Resource Points</th>
+			            <th>Units To Place</th>
+			            <th>Oil Zones</th>
+			            <th>Turns</th>
+			            <th>Capital Cities</th>
+			            <th>Spheres</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			    </tbody>
+			</table>
 	</body>
 </html>
