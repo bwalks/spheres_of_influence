@@ -425,6 +425,13 @@
 						$('#change_turn_button').hide();
 						$('#reset_turns_button').show();
 					}
+					else{
+						// Preventing turns from accidentally changing
+						$('#change_turn_button').prop('disabled', true);
+						setTimeout(function() {
+							$('#change_turn_button').prop('disabled', false);
+						}, 2000);
+					}
 		  		}
 
 		  		function newGame(){
