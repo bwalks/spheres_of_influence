@@ -5,9 +5,12 @@
 			.color {
 				 display: inline-block;
 				 min-width: 10px;
-				 opacity: 1;
 				 border: solid;
 				 border-color: black;
+			}
+			#current_turn {
+				min-width: 20px;
+				min-height: 20px;
 			}
 		</style>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
@@ -411,6 +414,34 @@
 		  			$("#zone_changer").hide();
 		  			drawTable(datatable);
 		  		})
+
+		  		var turns = null;
+
+		  		function changeTurns(){
+		  			var next_turn = turns.pop();
+					$('#turns_remaining').text(turns.length);
+					$('#current_turn').css('background-color', next_turn);
+					if(turns.length == 0){
+						$('#change_turn_button').hide();
+						$('#reset_turns_button').show();
+					}
+		  		}
+
+		  		function newGame(){
+		  			turns = getTurns();
+		  			$('#start_game').hide();
+		  			$('#start_turns').show();
+		  			changeTurns();
+		  		}
+
+		  		$('#reset_turns_button').click(function(){
+		  			$('#change_turn_button').show();
+					$('#reset_turns_button').hide();
+		  			newGame();
+		  		});
+
+		  		$('#start_game_button').click(newGame);
+		  		$('.next_turn').click(changeTurns);
 			});
 		</script>
 	</head>	
@@ -495,6 +526,17 @@
 			<area class="zone" shape="rect" coords="678,464,680,466" alt="Image Map" title="Image Map" href="#index.php?aff=mapped_users_0" />
 		</map>
 		<div>
+			<div>
+				<p id="start_turns" hidden="true">
+					Turns Remaining: <span id="turns_remaining"></span> <br />
+					Current Turn: <span class="color" id="current_turn"></span>
+					<button class="next_turn" id="change_turn_button">Next Turn</button>
+					<button id="reset_turns_button" hidden="True">Reset Turns</button>
+				</p>
+				<p id="start_game">
+					<button id="start_game_button">New Game</button>
+				</p>
+			</div>
 			<p id="zone_changer" hidden="true">
 				<span id="selected_zone"></span> 
 				<select id="color_selector">
