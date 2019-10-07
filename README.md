@@ -10,3 +10,5 @@ This app does the following:
 Click "New Game" to begin tracking. This starts the turn tracking.
 
 Click on the number for a zone to bring up the form to change which color controls that zone. Once the zone is changed, the table below is updated to reflect the change.
+
+(Demo)[https://bwalks.github.io/spheres_of_influence]
