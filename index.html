@@ -409,7 +409,6 @@
 		  			var new_color = $('#color_selector option:selected').val();
 		  			var zone_id = $('#selected_zone').text();
 		  			var zone = zones_registry[zone_id];
-		  			console.log("Changing zone from "  + zone.color + ' to ' + new_color);
 		  			zone.color = new_color;
 		  			$("#zone_changer").hide();
 		  			drawTable(datatable);
