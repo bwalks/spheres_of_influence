@@ -12,6 +12,9 @@
 				 margin-right: 5px;
 				 margin-top: 5px;
 			}
+			#past_turns {
+				margin-top: 5px;
+			}
 		</style>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -126,9 +129,6 @@
 				}
 
 				turns() {
-					if(this.resource_points() == 0){
-						return 0;
-					}
 					return 2 + this.oil_zones();
 				}
 
@@ -380,6 +380,9 @@
 			];
 
 			$(document).ready(function(){
+				// Used to determine whether or not to show the zone changer
+				var gameStarted = false;
+
 				var datatable = $('#table_id').DataTable({
 				    paging: false,
 				    searching: false,
@@ -397,6 +400,10 @@
 				drawTable(datatable);
 
 				$(".zone").click(function(){
+					if(!gameStarted){
+						return;
+					}
+					
 					var zone = zones_registry[this.id];
 					if(zone.color){
 						$('#color_selector').val(zone.color);
@@ -422,6 +429,7 @@
 		  		function changeTurns(){
 		  			var next_turn = turns.pop();
 		  			var turn_log = $('<span class="color"></span').css('background-color', next_turn);
+		  			$('#current_turn').css('background-color', next_turn);
 		  			$('#past_turns').append(turn_log);
 					$('#turns_remaining').text(turns.length);
 					if(turns.length == 0){
@@ -437,7 +445,8 @@
 					}
 		  		}
 
-		  		function newGame(){
+		  		function newGame(){ 
+		  			gameStarted = true;
 		  			turns = getTurns();
 		  			$('#start_game').hide();
 		  			$('#start_turns').show();
@@ -540,6 +549,7 @@
 			<div>
 				<p id="start_turns" hidden="true">
 					Turns Remaining: <span id="turns_remaining"></span> <br />
+					Current Turn: <span class="color" id="current_turn"></span>
 					<button class="next_turn" id="change_turn_button">Next Turn</button>
 					<button id="reset_turns_button" hidden="True">Reset Turns</button>  <br />
 					<span id="past_turns"></span>
