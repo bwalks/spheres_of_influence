@@ -7,10 +7,8 @@
 				 min-width: 10px;
 				 border: solid;
 				 border-color: black;
-			}
-			#current_turn {
-				min-width: 20px;
-				min-height: 20px;
+				 min-width: 20px;
+				 min-height: 20px;
 			}
 		</style>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
@@ -421,6 +419,8 @@
 
 		  		function changeTurns(){
 		  			var next_turn = turns.pop();
+		  			var turn_log = $('<span class="color"></span').css('background-color', next_turn);
+		  			$('#past_turns').append(turn_log);
 					$('#turns_remaining').text(turns.length);
 					$('#current_turn').css('background-color', next_turn);
 					if(turns.length == 0){
@@ -446,6 +446,7 @@
 		  		$('#reset_turns_button').click(function(){
 		  			$('#change_turn_button').show();
 					$('#reset_turns_button').hide();
+					$('#past_turns').html('');
 		  			newGame();
 		  		});
 
@@ -540,7 +541,8 @@
 					Turns Remaining: <span id="turns_remaining"></span> <br />
 					Current Turn: <span class="color" id="current_turn"></span>
 					<button class="next_turn" id="change_turn_button">Next Turn</button>
-					<button id="reset_turns_button" hidden="True">Reset Turns</button>
+					<button id="reset_turns_button" hidden="True">Reset Turns</button>  <br />
+					<span id="past_turns"></span>
 				</p>
 				<p id="start_game">
 					<button id="start_game_button">New Game</button>
@@ -563,19 +565,19 @@
 			</p>
 		</div>
 		<table id="table_id" class="display">
-			    <thead>
-			        <tr>
-			            <th>Color</th>
-			            <th>Resource Points</th>
-			            <th>Units To Place</th>
-			            <th>Oil Zones</th>
-			            <th>Turns</th>
-			            <th>Capital Cities</th>
-			            <th>Spheres</th>
-			        </tr>
-			    </thead>
-			    <tbody>
-			    </tbody>
-			</table>
+		    <thead>
+		        <tr>
+		            <th>Color</th>
+		            <th>Resource Points</th>
+		            <th>Units To Place</th>
+		            <th>Oil Zones</th>
+		            <th>Turns</th>
+		            <th>Capital Cities</th>
+		            <th>Spheres</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    </tbody>
+		</table>
 	</body>
 </html>
