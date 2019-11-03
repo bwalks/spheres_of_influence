@@ -9,6 +9,8 @@
 				 border-color: black;
 				 min-width: 20px;
 				 min-height: 20px;
+				 margin-right: 5px;
+				 margin-top: 5px;
 			}
 		</style>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
@@ -422,7 +424,6 @@
 		  			var turn_log = $('<span class="color"></span').css('background-color', next_turn);
 		  			$('#past_turns').append(turn_log);
 					$('#turns_remaining').text(turns.length);
-					$('#current_turn').css('background-color', next_turn);
 					if(turns.length == 0){
 						$('#change_turn_button').hide();
 						$('#reset_turns_button').show();
@@ -539,7 +540,6 @@
 			<div>
 				<p id="start_turns" hidden="true">
 					Turns Remaining: <span id="turns_remaining"></span> <br />
-					Current Turn: <span class="color" id="current_turn"></span>
 					<button class="next_turn" id="change_turn_button">Next Turn</button>
 					<button id="reset_turns_button" hidden="True">Reset Turns</button>  <br />
 					<span id="past_turns"></span>
