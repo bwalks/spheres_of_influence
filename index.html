@@ -56,7 +56,7 @@
 					"black": [],
 					"blue": [],
 					"yellow": [],
-					"orange": [],
+					"green": [],
 					"purple": []
 				};
 				var zones = Object.values(zones_registry);
@@ -126,6 +126,9 @@
 				}
 
 				turns() {
+					if(this.resource_points() == 0){
+						return 0;
+					}
 					return 2 + this.oil_zones();
 				}
 
@@ -238,7 +241,7 @@
 			var us_sphere = new Sphere();
 			us_sphere.zones = [
 				new Zone('us-3', 3, us_sphere),
-				new Zone('us-2-capital', 2, us_sphere),
+				new CapitalZone('us-2-capital', 2, us_sphere),
 				new OilZone('us-2-oil', 2, us_sphere),
 				new Zone('us-1-card', 1, us_sphere),
 				new Zone('us_ne-3', 3),
@@ -249,7 +252,7 @@
 				new Zone('mx-1-card', 1, mexico_sphere),
 				new Zone('cuba-1-card', 1, mexico_sphere),
 				new Zone('colombia-1', 1, mexico_sphere),
-				new Zone('venezuala-1-oil', 1, mexico_sphere),
+				new OilZone('venezuala-1-oil', 1, mexico_sphere),
 			];
 
 			var south_america_sphere = new Sphere();
@@ -553,7 +556,7 @@
 					<option value="black" style="background:black;">Black</option>
 					<option value="blue" style="background:blue;">Blue</option>
 					<option value="yellow" style="background:yellow;">Yellow</option>
-					<option value="orange" style="background:orange;">Orange</option>
+					<option value="green" style="background:green;">Green</option>
 					<option value="purple" style="background:purple;">Purple</option>
 				</select>
 				<button id="change_button">Change</button>
