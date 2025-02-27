@@ -285,9 +285,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateStatsTable() {
         // Clear the table
         statsTable.clear();
-        
+        console.log(gameColors);
         // For each color, calculate stats
-        allColors.forEach(color => {
+        gameColors.forEach(color => {
             // Get all countries with this color
             const colorCountries = Object.keys(countryColors).filter(id => countryColors[id] === color);
             
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Add row to table
             statsTable.row.add([
-                `<div class="color-display" style="background-color: ${color};"></div><span class="color-name">${color}</span>`,
+                `<div class="color-display" style="background-color: ${color};"></div><span class="color-name"></span>`,
                 resourcePoints,
                 units,
                 oilZones,
@@ -365,11 +365,9 @@ document.addEventListener('DOMContentLoaded', function() {
         currentRound = 1;
         turnHistory = [];
         
-        // Show game status, color selector, and map, hide game setup
-        gameStatusDiv.style.display = 'block';
+        // Show game play container, hide game setup
         document.querySelector('.game-setup').style.display = 'none';
-        document.getElementById('color-selector').style.display = 'block';
-        document.getElementById('map-container').style.display = 'block';
+        document.querySelector('.game-play-container').style.display = 'block';
         
         // Make sure only game colors are visible and selectable
         colorButtons.forEach(btn => {
@@ -395,6 +393,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Start the first round
         startNewRound();
+        
+        // Initialize the stats table
+        updateStatsTable();
     }
     
     // Start a new round
@@ -495,11 +496,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to reset the game UI
     function resetGameUI() {
-        // Show game setup and hide game status, color selector, and map
+        // Show game setup and hide game play container
         document.querySelector('.game-setup').style.display = 'block';
-        gameStatusDiv.style.display = 'none';
-        document.getElementById('color-selector').style.display = 'none';
-        document.getElementById('map-container').style.display = 'none';
+        document.querySelector('.game-play-container').style.display = 'none';
         
         // Reset color buttons to show all colors
         colorButtons.forEach(btn => {
@@ -576,7 +575,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Initialize the stats table
-    updateStatsTable();
 });

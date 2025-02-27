@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Country Color Changer</title>
+    <title>Spheres of Influence</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="css/country_colors.css">
     <style>
@@ -19,7 +19,7 @@
         /* Stats table */
         .stats-container {
             margin: 30px auto;
-            max-width: 680px;
+            max-width: 1000px;
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -63,160 +63,166 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-    <div class="container">        
-        <div class="map-container" id="map-container" style="display: none;">
-            <img src="board.jpg" id="map-image" usemap="#country-map" alt="World Map">
-            <map name="country-map" id="country-map">
-                <area class="zone" id="us-1-card" title="us-1-card" href="#" shape="rect" coords="69,106,96,130" />
-                <area class="zone" id="us-2-oil" title="us-2-oil" href="#" shape="rect" coords="62,148,98,169" />
-                <area class="zone" id="us-3" title="us-3" href="#" shape="rect" coords="37,126,64,154" />
-                <area class="zone" id="us-2-capital" title="us-2-capital" href="#" shape="rect" coords="102,145,128,170" />
-                <area class="zone" id="us_ne-3" title="us-3-capital" href="#" shape="rect" coords="119,117,147,145" />
-                <area class="zone" id="mx-3-capital-oil" title="mx-3-capital-oil" href="#" shape="rect" coords="38,174,75,208" />
-                <area class="zone" id="mx-1-card" title="mx-1-card" href="#" shape="rect" coords="76,234,104,262" />
-                <area class="zone" id="cuba-1-card" title="cuba-1-card" href="#" shape="rect" coords="121,202,144,231" />
-                <area class="zone" id="colombia-1" title="colombia-1" href="#" shape="rect" coords="116,271,140,302" />
-                <area class="zone" id="venezuala-1-oil" title="venezuala-1-oil" href="#" shape="rect" coords="152,260,180,291" />
-                <area class="zone" id="brazil-4-oil-capital" title="brazil-4-oil-capital" href="#" shape="rect" coords="153,312,204,349" />
-                <area class="zone" id="chile-1" title="chile-1" href="#" shape="rect" coords="118,323,147,350" />
-                <area class="zone" id="argentina-1-card" title="argentina-1-card" href="#" shape="rect" coords="158,369,188,398" />
-                <area class="zone" id="canada-2-capital" title="canada-2-capital" href="#" shape="rect" coords="164,65,190,91" />
-                <area class="zone" id="canada-1-oil" title="canada-1-oil" href="#" shape="rect" coords="78,67,116,96" />
-                <area class="zone" id="canada-1-card" title="canada-1-card" href="#" shape="rect" coords="89,34,120,54" />
-                <area class="zone" id="alaska-1-oil" title="alaska-1-oil" href="#" shape="rect" coords="36,32,70,58" />
-                <area class="zone" id="spain-2-card" title="spain-2-card" href="#" shape="rect" coords="218,155,253,184" />
-                <area class="zone" id="uk-4-capital" title="uk-4-capital" href="#" shape="rect" coords="232,43,261,72" />
-                <area class="zone" id="iceland-1-card" title="iceland-1-card" href="#" shape="rect" coords="220,7,244,37" />
-                <area class="zone" id="norway-2-oil" title="norway-2-oil" href="#" shape="rect" coords="292,15,320,45" />
-                <area class="zone" id="sweden-1" title="sweden-1" href="#" shape="rect" coords="333,19,353,42" />
-                <area class="zone" id="russia-4-capital" title="russia-4-capital" href="#" shape="rect" coords="370,23,397,56" />
-                <area class="zone" id="russia-1" title="russia-1" href="#" shape="rect" coords="346,56,370,83" />
-                <area class="zone" id="russia-3-oil" title="russia-3-oil" href="#" shape="rect" coords="412,53,443,76" />
-                <area class="zone" id="russia-1-card" title="russia-1-card" href="#" shape="rect" coords="483,27,521,56" />
-                <area class="zone" id="russia-1-oil" title="russia-1-oil" href="#" shape="rect" coords="568,33,603,57" />
-                <area class="zone" id="germany-4-capital" title="germany-4-capital" href="#" shape="rect" coords="269,84,293,108" />
-                <area class="zone" id="france-3" title="france-3" href="#" shape="rect" coords="247,112,273,138" />
-                <area class="zone" id="austria-2-card" title="austria-2-card" href="#" shape="rect" coords="298,106,329,128" />
-                <area class="zone" id="italy-2" title="italy-2" href="#" shape="rect" coords="279,129,304,154" />
-                <area class="zone" id="poland-2" title="poland-2" href="#" shape="rect" coords="316,77,340,102" />
-                <area class="zone" id="ukraine-2" title="ukraine-2" href="#" shape="rect" coords="356,93,380,118" />
-                <area class="zone" id="balkans-1-card" title="balkans-1-card" href="#" shape="rect" coords="317,129,349,153" />
-                <area class="zone" id="turkey-3-capital" title="turkey-3-capital" href="#" shape="rect" coords="361,136,382,158" />
-                <area class="zone" id="kazakhstan-1-capital-oil" title="kazakhstan-1-capital-oil" href="#" shape="rect" coords="458,82,482,106" />
-                <area class="zone" id="uzbekistan-1" title="uzbekistan-1" href="#" shape="rect" coords="455,107,480,126" />
-                <area class="zone" id="turkmenistan-1-card" title="turkmenistan-1-card" href="#" shape="rect" coords="442,126,467,147" />
-                <area class="zone" id="middle_east-3-oil-capital" title="middle_east-3-oil-capital" href="#" shape="rect" coords="404,222,437,246" />
-                <area class="zone" id="middle_east-1-card" title="middle_east-1-card" href="#" shape="rect" coords="465,156,490,174" />
-                <area class="zone" id="middle_east-2-oil" title="middle_east-2-oil" href="#" shape="rect" coords="428,160,460,185" />
-                <area class="zone" id="middle_east-1-oil" title="middle_east-1-oil" href="#" shape="rect" coords="397,178,422,200" />
-                <area class="zone" id="middle_east-1" title="middle_east-1" href="#" shape="rect" coords="382,157,402,179" />
-                <area class="zone" id="middle_east-2-card" title="middle_east-2-card" href="#" shape="rect" coords="360,175,384,201" />
-                <area class="zone" id="china-1-oil" title="china-1-oil" href="#" shape="rect" coords="511,130,541,155" />
-                <area class="zone" id="china-5-capital" title="china-5-capital" href="#" shape="rect" coords="560,136,588,158" />
-                <area class="zone" id="china-3" title="china-3" href="#" shape="rect" coords="579,173,604,193" />
-                <area class="zone" id="china-1" title="china-1" href="#" shape="rect" coords="581,98,601,122" />
-                <area class="zone" id="china-1-card" title="china-1-card" href="#" shape="rect" coords="605,102,626,126" />
-                <area class="zone" id="korea-3" title="korea-3" href="#" shape="rect" coords="613,133,636,158" />
-                <area class="zone" id="japan-4-capital" title="japan-4-capital" href="#" shape="rect" coords="648,124,675,155" />
-                <area class="zone" id="taiwan-2-card" title="taiwan-2-card" href="#" shape="rect" coords="608,190,631,214" />
-                <area class="zone" id="india-6-capital" title="india-6-capital" href="#" shape="rect" coords="497,198,524,226" />
-                <area class="zone" id="pakistan-2" title="pakistan-2" href="#" shape="rect" coords="475,175,501,198" />
-                <area class="zone" id="myanmar-2" title="myanmar-2" href="#" shape="rect" coords="536,184,560,210" />
-                <area class="zone" id="thailand-1" title="thailand-1" href="#" shape="rect" coords="556,208,576,229" />
-                <area class="zone" id="vietnam-2-card" title="vietnam-2-card" href="#" shape="rect" coords="576,222,603,249" />
-                <area class="zone" id="indonesia-2-oil-capital" title="indonesia-2-oil-capital" href="#" shape="rect" coords="576,295,608,324" />
-                <area class="zone" id="philippines-1-card" title="philippines-1-card" href="#" shape="rect" coords="626,258,652,281" />
-                <area class="zone" id="guinea-1-card" title="guinea-1-card" href="#" shape="rect" coords="631,313,659,338" />
-                <area class="zone" id="nz-1-card" title="nz-1-card" href="#" shape="rect" coords="617,409,644,438" />
-                <area class="zone" id="australia-3-capital" title="australia-3-capital" href="#" shape="rect" coords="598,376,622,406" />
-                <area class="zone" id="australia-1-oil" title="australia-1-oil" href="#" shape="rect" coords="560,376,589,403" />
-                <area class="zone" id="madagascar-1-card" title="madagascar-1-card" href="#" shape="rect" coords="385,377,414,402" />
-                <area class="zone" id="south_africa-2-capital" title="south_africa-2-capital" href="#" shape="rect" coords="314,385,344,411" />
-                <area class="zone" id="angola-1-oil" title="angola-1-oil" href="#" shape="rect" coords="317,351,346,376" />
-                <area class="zone" id="tanzia-1-card" title="tanzia-1-card" href="#" shape="rect" coords="362,340,388,363" />
-                <area class="zone" id="ethiopia-1" title="ethiopia-1" href="#" shape="rect" coords="364,282,403,313" />
-                <area class="zone" id="egypt-2-capital" title="egypt-2-capital" href="#" shape="rect" coords="338,231,374,264" />
-                <area class="zone" id="libya-1-oil" title="libya-1-oil" href="#" shape="rect" coords="296,215,331,243" />
-                <area class="zone" id="algeria-1-oil" title="algeria-1-oil" href="#" shape="rect" coords="254,214,290,242" />
-                <area class="zone" id="morocco-1-card" title="morocco-1-card" href="#" shape="rect" coords="211,233,244,260" />
-                <area class="zone" id="liberia-1" title="liberia-1" href="#" shape="rect" coords="236,269,264,300" />
-                <area class="zone" id="nigeria-2-oil-capital" title="nigeria-2-oil-capital" href="#" shape="rect" coords="271,273,311,302" />
-                <area class="zone" id="congo-1-card" title="congo-1-card" href="#" shape="rect" coords="310,306,349,336" />
-            </map>
-        </div>
+    <div class="container">
+        <h1>Spheres of Influence</h1>
         
-        <div class="color-selector" id="color-selector" style="display: none;">
-            <h2>Select a color:</h2>
-            <div class="color-options">
-                <button class="color-btn" data-color="red" style="background-color: red;"></button>
-                <button class="color-btn" data-color="blue" style="background-color: blue;"></button>
-                <button class="color-btn" data-color="yellow" style="background-color: yellow;"></button>
-                <button class="color-btn" data-color="brown" style="background-color: brown;"></button>
-                <button class="color-btn" data-color="green" style="background-color: green;"></button>
-                <button class="color-btn" data-color="purple" style="background-color: purple;"></button>
-                <button class="color-btn" data-color="white" style="background-color: white;"></button>
-                <button class="color-btn" data-color="black" style="background-color: black;"></button>
+        <div class="game-setup">
+            <h2>Game Setup</h2>
+            <div class="color-selection">
+                <p>Select colors for the game:</p>
+                <div class="game-color-options">
+                    <label><input type="checkbox" class="game-color-checkbox" value="red" checked> Red</label>
+                    <label><input type="checkbox" class="game-color-checkbox" value="blue" checked> Blue</label>
+                    <label><input type="checkbox" class="game-color-checkbox" value="yellow"> Yellow</label>
+                    <label><input type="checkbox" class="game-color-checkbox" value="brown"> Brown</label>
+                    <label><input type="checkbox" class="game-color-checkbox" value="green"> Green</label>
+                    <label><input type="checkbox" class="game-color-checkbox" value="purple"> Purple</label>
+                    <label><input type="checkbox" class="game-color-checkbox" value="white"> White</label>
+                    <label><input type="checkbox" class="game-color-checkbox" value="black"> Black</label>
+                </div>
             </div>
+            <button id="start-game-btn" class="game-btn">Start New Game</button>
         </div>
         
-        <div class="game-controls">
-            <div class="game-setup">
-                <h2>Game Setup</h2>
-                <div class="color-selection">
-                    <p>Select colors for the game:</p>
-                    <div class="game-color-options">
-                        <label><input type="checkbox" class="game-color-checkbox" value="red" checked> Red</label>
-                        <label><input type="checkbox" class="game-color-checkbox" value="blue" checked> Blue</label>
-                        <label><input type="checkbox" class="game-color-checkbox" value="yellow"> Yellow</label>
-                        <label><input type="checkbox" class="game-color-checkbox" value="brown"> Brown</label>
-                        <label><input type="checkbox" class="game-color-checkbox" value="green"> Green</label>
-                        <label><input type="checkbox" class="game-color-checkbox" value="purple"> Purple</label>
-                        <label><input type="checkbox" class="game-color-checkbox" value="white"> White</label>
-                        <label><input type="checkbox" class="game-color-checkbox" value="black"> Black</label>
+        <div class="game-play-container" style="display: none;">
+            <div class="map-and-controls">
+                <div class="map-container" id="map-container">
+                    <img src="board.jpg" id="map-image" usemap="#country-map" alt="World Map">
+                    <map name="country-map" id="country-map">
+                        <area class="zone" id="us-1-card" title="us-1-card" href="#" shape="rect" coords="69,106,96,130" />
+                        <area class="zone" id="us-2-oil" title="us-2-oil" href="#" shape="rect" coords="62,148,98,169" />
+                        <area class="zone" id="us-3" title="us-3" href="#" shape="rect" coords="37,126,64,154" />
+                        <area class="zone" id="us-2-capital" title="us-2-capital" href="#" shape="rect" coords="102,145,128,170" />
+                        <area class="zone" id="us_ne-3" title="us-3-capital" href="#" shape="rect" coords="119,117,147,145" />
+                        <area class="zone" id="mx-3-capital-oil" title="mx-3-capital-oil" href="#" shape="rect" coords="38,174,75,208" />
+                        <area class="zone" id="mx-1-card" title="mx-1-card" href="#" shape="rect" coords="76,234,104,262" />
+                        <area class="zone" id="cuba-1-card" title="cuba-1-card" href="#" shape="rect" coords="121,202,144,231" />
+                        <area class="zone" id="colombia-1" title="colombia-1" href="#" shape="rect" coords="116,271,140,302" />
+                        <area class="zone" id="venezuala-1-oil" title="venezuala-1-oil" href="#" shape="rect" coords="152,260,180,291" />
+                        <area class="zone" id="brazil-4-oil-capital" title="brazil-4-oil-capital" href="#" shape="rect" coords="153,312,204,349" />
+                        <area class="zone" id="chile-1" title="chile-1" href="#" shape="rect" coords="118,323,147,350" />
+                        <area class="zone" id="argentina-1-card" title="argentina-1-card" href="#" shape="rect" coords="158,369,188,398" />
+                        <area class="zone" id="canada-2-capital" title="canada-2-capital" href="#" shape="rect" coords="164,65,190,91" />
+                        <area class="zone" id="canada-1-oil" title="canada-1-oil" href="#" shape="rect" coords="78,67,116,96" />
+                        <area class="zone" id="canada-1-card" title="canada-1-card" href="#" shape="rect" coords="89,34,120,54" />
+                        <area class="zone" id="alaska-1-oil" title="alaska-1-oil" href="#" shape="rect" coords="36,32,70,58" />
+                        <area class="zone" id="spain-2-card" title="spain-2-card" href="#" shape="rect" coords="218,155,253,184" />
+                        <area class="zone" id="uk-4-capital" title="uk-4-capital" href="#" shape="rect" coords="232,43,261,72" />
+                        <area class="zone" id="iceland-1-card" title="iceland-1-card" href="#" shape="rect" coords="220,7,244,37" />
+                        <area class="zone" id="norway-2-oil" title="norway-2-oil" href="#" shape="rect" coords="292,15,320,45" />
+                        <area class="zone" id="sweden-1" title="sweden-1" href="#" shape="rect" coords="333,19,353,42" />
+                        <area class="zone" id="russia-4-capital" title="russia-4-capital" href="#" shape="rect" coords="370,23,397,56" />
+                        <area class="zone" id="russia-1" title="russia-1" href="#" shape="rect" coords="346,56,370,83" />
+                        <area class="zone" id="russia-3-oil" title="russia-3-oil" href="#" shape="rect" coords="412,53,443,76" />
+                        <area class="zone" id="russia-1-card" title="russia-1-card" href="#" shape="rect" coords="483,27,521,56" />
+                        <area class="zone" id="russia-1-oil" title="russia-1-oil" href="#" shape="rect" coords="568,33,603,57" />
+                        <area class="zone" id="germany-4-capital" title="germany-4-capital" href="#" shape="rect" coords="269,84,293,108" />
+                        <area class="zone" id="france-3" title="france-3" href="#" shape="rect" coords="247,112,273,138" />
+                        <area class="zone" id="austria-2-card" title="austria-2-card" href="#" shape="rect" coords="298,106,329,128" />
+                        <area class="zone" id="italy-2" title="italy-2" href="#" shape="rect" coords="279,129,304,154" />
+                        <area class="zone" id="poland-2" title="poland-2" href="#" shape="rect" coords="316,77,340,102" />
+                        <area class="zone" id="ukraine-2" title="ukraine-2" href="#" shape="rect" coords="356,93,380,118" />
+                        <area class="zone" id="balkans-1-card" title="balkans-1-card" href="#" shape="rect" coords="317,129,349,153" />
+                        <area class="zone" id="turkey-3-capital" title="turkey-3-capital" href="#" shape="rect" coords="361,136,382,158" />
+                        <area class="zone" id="kazakhstan-1-capital-oil" title="kazakhstan-1-capital-oil" href="#" shape="rect" coords="458,82,482,106" />
+                        <area class="zone" id="uzbekistan-1" title="uzbekistan-1" href="#" shape="rect" coords="455,107,480,126" />
+                        <area class="zone" id="turkmenistan-1-card" title="turkmenistan-1-card" href="#" shape="rect" coords="442,126,467,147" />
+                        <area class="zone" id="middle_east-3-oil-capital" title="middle_east-3-oil-capital" href="#" shape="rect" coords="404,222,437,246" />
+                        <area class="zone" id="middle_east-1-card" title="middle_east-1-card" href="#" shape="rect" coords="465,156,490,174" />
+                        <area class="zone" id="middle_east-2-oil" title="middle_east-2-oil" href="#" shape="rect" coords="428,160,460,185" />
+                        <area class="zone" id="middle_east-1-oil" title="middle_east-1-oil" href="#" shape="rect" coords="397,178,422,200" />
+                        <area class="zone" id="middle_east-1" title="middle_east-1" href="#" shape="rect" coords="382,157,402,179" />
+                        <area class="zone" id="middle_east-2-card" title="middle_east-2-card" href="#" shape="rect" coords="360,175,384,201" />
+                        <area class="zone" id="china-1-oil" title="china-1-oil" href="#" shape="rect" coords="511,130,541,155" />
+                        <area class="zone" id="china-5-capital" title="china-5-capital" href="#" shape="rect" coords="560,136,588,158" />
+                        <area class="zone" id="china-3" title="china-3" href="#" shape="rect" coords="579,173,604,193" />
+                        <area class="zone" id="china-1" title="china-1" href="#" shape="rect" coords="581,98,601,122" />
+                        <area class="zone" id="china-1-card" title="china-1-card" href="#" shape="rect" coords="605,102,626,126" />
+                        <area class="zone" id="korea-3" title="korea-3" href="#" shape="rect" coords="613,133,636,158" />
+                        <area class="zone" id="japan-4-capital" title="japan-4-capital" href="#" shape="rect" coords="648,124,675,155" />
+                        <area class="zone" id="taiwan-2-card" title="taiwan-2-card" href="#" shape="rect" coords="608,190,631,214" />
+                        <area class="zone" id="india-6-capital" title="india-6-capital" href="#" shape="rect" coords="497,198,524,226" />
+                        <area class="zone" id="pakistan-2" title="pakistan-2" href="#" shape="rect" coords="475,175,501,198" />
+                        <area class="zone" id="myanmar-2" title="myanmar-2" href="#" shape="rect" coords="536,184,560,210" />
+                        <area class="zone" id="thailand-1" title="thailand-1" href="#" shape="rect" coords="556,208,576,229" />
+                        <area class="zone" id="vietnam-2-card" title="vietnam-2-card" href="#" shape="rect" coords="576,222,603,249" />
+                        <area class="zone" id="indonesia-2-oil-capital" title="indonesia-2-oil-capital" href="#" shape="rect" coords="576,295,608,324" />
+                        <area class="zone" id="philippines-1-card" title="philippines-1-card" href="#" shape="rect" coords="626,258,652,281" />
+                        <area class="zone" id="guinea-1-card" title="guinea-1-card" href="#" shape="rect" coords="631,313,659,338" />
+                        <area class="zone" id="nz-1-card" title="nz-1-card" href="#" shape="rect" coords="617,409,644,438" />
+                        <area class="zone" id="australia-3-capital" title="australia-3-capital" href="#" shape="rect" coords="598,376,622,406" />
+                        <area class="zone" id="australia-1-oil" title="australia-1-oil" href="#" shape="rect" coords="560,376,589,403" />
+                        <area class="zone" id="madagascar-1-card" title="madagascar-1-card" href="#" shape="rect" coords="385,377,414,402" />
+                        <area class="zone" id="south_africa-2-capital" title="south_africa-2-capital" href="#" shape="rect" coords="314,385,344,411" />
+                        <area class="zone" id="angola-1-oil" title="angola-1-oil" href="#" shape="rect" coords="317,351,346,376" />
+                        <area class="zone" id="tanzia-1-card" title="tanzia-1-card" href="#" shape="rect" coords="362,340,388,363" />
+                        <area class="zone" id="ethiopia-1" title="ethiopia-1" href="#" shape="rect" coords="364,282,403,313" />
+                        <area class="zone" id="egypt-2-capital" title="egypt-2-capital" href="#" shape="rect" coords="338,231,374,264" />
+                        <area class="zone" id="libya-1-oil" title="libya-1-oil" href="#" shape="rect" coords="296,215,331,243" />
+                        <area class="zone" id="algeria-1-oil" title="algeria-1-oil" href="#" shape="rect" coords="254,214,290,242" />
+                        <area class="zone" id="morocco-1-card" title="morocco-1-card" href="#" shape="rect" coords="211,233,244,260" />
+                        <area class="zone" id="liberia-1" title="liberia-1" href="#" shape="rect" coords="236,269,264,300" />
+                        <area class="zone" id="nigeria-2-oil-capital" title="nigeria-2-oil-capital" href="#" shape="rect" coords="271,273,311,302" />
+                        <area class="zone" id="congo-1-card" title="congo-1-card" href="#" shape="rect" coords="310,306,349,336" />
+                    </map>
+                </div>
+                
+                <div class="controls-panel">
+                    <div class="color-selector" id="color-selector">
+                        <h2>Select a color:</h2>
+                        <div class="color-options">
+                            <button class="color-btn" data-color="red" style="background-color: red;"></button>
+                            <button class="color-btn" data-color="blue" style="background-color: blue;"></button>
+                            <button class="color-btn" data-color="yellow" style="background-color: yellow;"></button>
+                            <button class="color-btn" data-color="brown" style="background-color: brown;"></button>
+                            <button class="color-btn" data-color="green" style="background-color: green;"></button>
+                            <button class="color-btn" data-color="purple" style="background-color: purple;"></button>
+                            <button class="color-btn" data-color="white" style="background-color: white;"></button>
+                            <button class="color-btn" data-color="black" style="background-color: black;"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-status">
+                        <h2>Game Status</h2>
+                        <div class="current-turn">
+                            <h3>Current Turn: <span id="current-turn-color"></span></h3>
+                            <div id="current-turn-indicator" class="turn-indicator"></div>
+                        </div>
+                        <div class="turn-info">
+                            <p>Round: <span id="current-round">0</span></p>
+                            <p>Turns Remaining: <span id="turns-remaining">0</span></p>
+                        </div>
+                        <button id="next-turn-btn" class="game-btn">Next Turn</button>
+                        <button id="next-round-btn" class="game-btn" style="display: none;">Start Next Round</button>
+                        <button id="reset-game-btn" class="game-btn reset-btn">End Game</button>
+                    </div>
+                    
+                    <div class="turn-history">
+                        <h3>Turn History</h3>
+                        <div id="turn-history-list" class="turn-history-list"></div>
                     </div>
                 </div>
-                <button id="start-game-btn" class="game-btn">Start New Game</button>
             </div>
             
-            <div class="game-status" style="display: none;">
-                <h2>Game Status</h2>
-                <div class="current-turn">
-                    <h3>Current Turn: <span id="current-turn-color"></span></h3>
-                    <div id="current-turn-indicator" class="turn-indicator"></div>
-                </div>
-                <div class="turn-info">
-                    <p>Round: <span id="current-round">0</span></p>
-                    <p>Turns Remaining: <span id="turns-remaining">0</span></p>
-                </div>
-                <button id="next-turn-btn" class="game-btn">Next Turn</button>
-                <button id="next-round-btn" class="game-btn" style="display: none;">Start Next Round</button>
-                <button id="reset-game-btn" class="game-btn reset-btn">End Game</button>
+            <div class="stats-container">
+                <h2>Player Statistics</h2>
+                <table id="stats-table" class="display">
+                    <thead>
+                        <tr>
+                            <th>Color</th>
+                            <th>Resource Points</th>
+                            <th>Units</th>
+                            <th>Oil Zones</th>
+                            <th>Turns</th>
+                            <th>Capital Cities</th>
+                            <th>Spheres</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
             </div>
-            
-            <div class="turn-history">
-                <h3>Turn History</h3>
-                <div id="turn-history-list" class="turn-history-list"></div>
-            </div>
-        </div>
-        
-        <div class="stats-container">
-            <h2>Player Statistics</h2>
-            <table id="stats-table" class="display">
-                <thead>
-                    <tr>
-                        <th>Color</th>
-                        <th>Resource Points</th>
-                        <th>Units</th>
-                        <th>Oil Zones</th>
-                        <th>Turns</th>
-                        <th>Capital Cities</th>
-                        <th>Spheres</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Table rows will be populated by JavaScript -->
-                </tbody>
-            </table>
         </div>
     </div>
     
