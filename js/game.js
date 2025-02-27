@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Start the first round
         startNewRound();
-        
+
         // Initialize the stats table
         updateStatsTable();
     }
@@ -467,7 +467,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentColor = turnOrder[currentTurnIndex];
             
             // Update the display
-            currentTurnColorSpan.textContent = currentColor;
             currentTurnIndicator.style.backgroundColor = currentColor;
             
             // Add to turn history
