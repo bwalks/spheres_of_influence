@@ -7,7 +7,11 @@ This app does the following:
 - Handles randomized turn selection, including additional turns for oil zones controlled.
 
 ## How to Use
-Click "New Game" to begin tracking. This starts the turn tracking.
+- Select the colors for each faction in the game
+- Click "Start New Game" to begin the first round.
+- The turns are randomized each round
+- Select a color then click on a country on the map to denote the color owning that country.
+- Selecting the country again will remove the color.
 
 Click on the number for a zone to bring up the form to change which color controls that zone. Once the zone is changed, the table below is updated to reflect the change.
 
